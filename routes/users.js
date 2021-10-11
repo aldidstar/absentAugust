@@ -9,7 +9,7 @@ const { query } = require("express");
 const { timeEnd } = require("console");
 
 module.exports = function (db) {
-  router.get("/",  function (req, res, next) {
+  router.get("/", helpers.isLoggedIn,  function (req, res, next) {
     const session = req.session.user
     const { Name, Start, End } = req.query;
 
