@@ -1,0 +1,161 @@
+<%- include('../partials/header') %>
+
+<form action="" method="GET">
+  <input type="hidden" name="page" value="1" />
+
+  <%- include('../partials/navbar') %>
+
+ 
+
+ <br>
+  
+ <div style="margin-bottom: 2rem;">
+  <h1>Absensi Pegawai</h1>
+</div>
+
+  
+  <div class="mb-3 row" style="margin-bottom: 2rem;">
+    <label for="Name" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-2">
+      <input
+        type="text"
+        value="<%= query.Name %>"
+        class="form-control"
+        id="Name"
+        name="Name"
+        placeholder="Name"
+        
+      />
+    </div>
+  </div>
+<br>
+
+  <div class="mb-3 row">
+    <label for="start" class="col-sm-2 col-form-label">Date</label>
+    <div class="col-sm-2">
+      <input
+        type="date"
+        value="<%= query.Start %>"
+        class="form-control"
+        id="start"
+        name="Start"
+        placeholder="Name"
+        
+      />  <div style="margin-top: 1rem; margin-bottom: 1rem;"><p>to</p></div>
+      <input
+      type="date"
+      value="<%= query.End %>"
+      class="form-control"
+      id="start"
+      name="End"
+      placeholder="Name"
+      
+    />
+  </div>
+</div>
+  <button type="submit" class="btn btn-success">Search</button>
+  <a class="btn btn-warning" href="/projects">Reset</a>
+</form>
+
+
+<br /><br /><br /><br />
+
+<table  class="table table-striped">
+  <tr>
+    
+    <th  id="checkid">Emp_No</th>
+  
+    <th  id="checkname">Name</th>
+   
+    <th  id="checkname">Date</th>
+
+    <th  id="checkname">On_duty</th>
+
+    <th  id="checkname">Off_duty</th>
+
+    <th  id="checkname">Clock_In</th>
+
+    <th  id="checkname">Clock_Out</th>
+
+    <th  id="checkname">Late</th>
+
+    <th  id="checkname">Early</th>
+
+    <th  id="checkname">Absent</th>
+    
+  </tr>
+  <% nama.forEach((item, index) => { %>
+  <tr  class="genap">
+  
+    <td  id="cekid"><%= item.Emp_No %></td>
+    <td  id="cekname"><%= item.Name %></td>
+   
+    <td  id="cekname"><%= `${moment(item.Date).format('MM/DD/YYYY')} ` %></td>
+    <td  id="cekname"><%= item.On_duty %></td>
+    <td  id="cekname"><%= item.Off_duty %></td>
+    <td  id="cekname"><%= item.Clock_In %></td>
+    <td  id="cekname"><%= item.Clock_Out %></td>
+    <td  id="cekname"><%= item.Late %></td>
+    <td  id="cekname"><%= item.Early %></td>
+    <td  id="cekname"><%= item.Absent %></td>
+ 
+  </tr>
+  <% }) %>
+</table>
+
+<nav aria-label="...">
+  <ul class="pagination" style="margin-left: 25%;">
+    <li class="page-item ">
+      <% if(page > 1) { %>
+          <% let i = page  %>
+          <% i--  %>
+      <a class="page-link " href="<%= url.replace(`page=${page}`, `page=${i}`) %>"  >Previous</a>
+      <% } %>
+    </li>
+    <% for(let i = 1; i <= pages ; i++) { %>
+    <li class="page-item <%= page == i ? 'active' : '' %>"><a class="page-link" href="<%= url.replace(`page=${page}`, `page=${i}`) %>"><%= i %></a></li>
+    <% } %>
+  </li>
+   
+    
+    <li class="page-item">
+      <% if(page <= pages - 1) { %>
+          <% let i = page  %>
+          <% i++  %>
+      <a class="page-link" href="<%= url.replace(`page=${page}`, `page=${i}`) %>">Next</a>
+      <% } %>
+    </li>
+  </ul>
+</nav>
+<br>
+
+
+
+<script>
+  // function myFunction1() {
+  //   if (document.getElementById("myCheck1").checked == true) {
+  //     document.getElementById("start").disabled = false;
+  //   } else {
+  //     document.getElementById("start").disabled = true;
+  //   }
+  // }
+  // function myFunction2() {
+  //   if (document.getElementById("myCheck2").checked == true) {
+  //     document.getElementById("Name").disabled = false;
+  //   } else {
+  //     document.getElementById("Name").disabled = true;
+  //   }
+  // }
+
+  // function myFunction3() {
+  //   if (document.getElementById("myCheck3").checked == true) {
+  //     document.getElementById("Member").disabled = false;
+  //   } else {
+  //     document.getElementById("Member").disabled = true;
+  //   }
+  // }
+
+ 
+</script>
+
+<%- include('../partials/footer') %>
